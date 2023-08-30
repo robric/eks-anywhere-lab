@@ -1,0 +1,31 @@
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens1f0np0:
+      dhcp4: no
+    eno12399:
+      dhcp4: yes
+  bridges:
+    bridge-eks-a:
+      interfaces:
+          - ens1f0np0
+      addresses: [10.0.1.254/24]
+      mtu: 1500
+      dhcp4: no
+      dhcp6: no
+  vlans:
+    vlan10:
+        id: 10
+        link: bridge-eks-a
+        addresses: [10.0.10.254/24]
+    vlan20:
+        id: 20
+        link: bridge-eks-a
+        addresses: [10.0.20.254/24]
+    vlan21:
+        id: 21
+        link: bridge-eks-a
+        addresses: [10.0.21.254/24]
